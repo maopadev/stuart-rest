@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    hostname: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_DATABASE: STUDB24V1
+    ports:
+      - "27017:27017"
+
+  spring:
+    container_name: spring
+    image: pee-java-app:latest
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
